@@ -1,0 +1,15 @@
+[submodule "aj-insights_com_au"]
+	path = aj-insights_com_au
+	url = ./aj-insights_com_au
+[submodule "local-agentic-ai-comprehensive-documentation"]
+	path = local-agentic-ai-comprehensive-documentation
+	url = ./local-agentic-ai-comprehensive-documentation
+[submodule "local-agentic-platform"]
+	path = local-agentic-platform
+	url = ./local-agentic-platform
+[submodule "mcp-server-cloudflare"]
+	path = mcp-server-cloudflare
+	url = ./mcp-server-cloudflare
+[submodule "webdock-cli"]
+	path = webdock-cli
+	url = ./webdock-cli

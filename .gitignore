@@ -1,0 +1,77 @@
+# Node modules
+node_modules/
+**/node_modules/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Next.js
+.next/
+out/
+build/
+dist/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Certificates
+ssl-certs/
+*.pem
+*.key
+*.crt
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Database
+*.db
+*.sqlite
+
+# Docker
+docker-compose.override.yml
+
+# Package lock files (keep one)
+package-lock.json
+yarn.lock
+# pnpm-lock.yaml (keep this one)
+
+# Build artifacts
+*.zip
+archive-backup-*.zip
+
+# MCP config (may contain sensitive data)
+mcp_config.json
+
+# Test coverage
+coverage/
+.nyc_output/
