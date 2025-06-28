@@ -1,0 +1,301 @@
+# Enhanced Master Deployment Configuration
+# Unified framework for managing all Cloudflare and related services across teams
+# 
+# Port Allocation Strategy:
+# - 30000-30099: Public-facing services (NGINX, monitoring)
+# - 30100-30199: Frontend services  
+# - 30200-30299: Backend/API services
+# - 30300-30399: Database services
+# - 30400-30499: Caching/Redis services
+# - 30500-30599: Message queues/pub-sub
+# - 30600-30699: Monitoring/logging services
+# - 30700-30799: Development/testing services
+# - 30800-30899: Third-party integrations
+# - 30900-30999: Reserved for future use
+
+metadata:
+  version: "2.0"
+  last_updated: "2025-06-26"
+  maintainer: "Head of Deployments"
+  port_allocation_strategy: "30000-30999"
+  
+infrastructure:
+  primary_host:
+    name: "thunder1.vps.webdock.cloud"
+    ipv4: "193.181.208.69"
+    ipv6: "2a0f:0f01:0208:46::0"
+    location: "Denmark, EU"
+    type: "KVM Virtual Machine"
+    profile: "NVMe Bit"
+    image: "Noble LEMP 8.3"
+    admin_user: "admin"
+    web_root: "/var/www/html"
+    
+  domains:
+    primary: "ajinsights.app"
+    agentic: "agentic-ai.ajinsights.app"  
+    monitoring: "monitoring.ajinsights.app"
+    api: "api.ajinsights.app"
+    docs: "docs.ajinsights.app"
+
+platforms:
+  # Multi-service platforms (docker-compose based)
+  - name: "local-agentic-platform"
+    type: "platform"
+    status: "active"
+    priority: "critical"
+    description: "Multi-agent AI platform with monitoring stack"
+    repository: "https://github.com/your-org/local-agentic-platform.git"
+    compose_file: "/home/gairforce5/projects/local-agentic-platform/docker-compose.yml"
+    host: "thunder1.vps.webdock.cloud"
+    domains: 
+      - "agentic-ai.ajinsights.app"
+      - "monitoring.ajinsights.app"
+    requires_secrets: true
+    team: "ai-platform"
+    services:
+      nginx:
+        port: 30080
+        type: "reverse-proxy"
+        public: true
+        health_check: "http://localhost:30080/health"
+      frontend:
+        port: 30100  # Internal: 3000, mapped to 30100
+        type: "nextjs"
+        public: false
+        depends_on: ["backend"]
+      backend:
+        port: 30200  # Internal: 8000, mapped to 30200
+        type: "fastapi"
+        public: false
+        depends_on: ["postgres", "redis", "chroma"]
+      postgres:
+        port: 30301  # Internal: 5432, mapped to 30301
+        type: "database"
+        public: false
+        data_volume: "postgres_data"
+      redis:
+        port: 30401  # Internal: 6379, mapped to 30401
+        type: "cache"
+        public: false
+        data_volume: "redis_data"
+      chroma:
+        port: 30800  # Internal: 8000, mapped to 30800 (avoid conflict with backend)
+        type: "vector-db"
+        public: false
+        data_volume: "chroma_data"
+      prometheus:
+        port: 30090
+        type: "monitoring"
+        public: true
+        health_check: "http://localhost:30090/metrics"
+      grafana:
+        port: 30601  # Internal: 3000, mapped to 30601 (avoid conflict with frontend)
+        type: "monitoring"
+        public: false
+        depends_on: ["prometheus"]
+      loki:
+        port: 30602  # Internal: 3100, mapped to 30602
+        type: "logging"
+        public: false
+      postgres-exporter:
+        port: 30603  # Internal: 9187, mapped to 30603
+        type: "monitoring"
+        public: false
+        depends_on: ["postgres"]
+      promtail:
+        type: "log-shipper"
+        public: false
+        depends_on: ["loki"]
+
+services:
+  # Individual services (single container deployments)
+  - name: "cloudflare-docs"
+    type: "service"
+    status: "development"
+    priority: "medium"
+    description: "Cloudflare documentation site"
+    repository: "https://github.com/cloudflare/cloudflare-docs.git"
+    stack: "nodejs"
+    port: 30150
+    host: "thunder1.vps.webdock.cloud"
+    domain: "docs.ajinsights.app"
+    requires_secrets: false
+    team: "documentation"
+    build_command: "npm run build"
+    start_command: "npm start"
+    health_check: "http://localhost:30150"
+    
+  - name: "api-gateway" 
+    type: "service"
+    status: "planned"
+    priority: "high"
+    description: "Central API gateway for all services"
+    repository: "https://github.com/your-org/api-gateway.git"
+    stack: "nodejs"
+    port: 30250
+    host: "thunder1.vps.webdock.cloud"
+    domain: "api.ajinsights.app"
+    requires_secrets: true
+    team: "platform"
+    depends_on: ["local-agentic-platform"]
+    
+  - name: "deployment-dashboard"
+    type: "service"
+    status: "planned" 
+    priority: "high"
+    description: "CEO dashboard for deployment tracking"
+    repository: "https://github.com/your-org/deployment-dashboard.git"
+    stack: "nodejs"
+    port: 30151
+    host: "thunder1.vps.webdock.cloud"
+    domain: "dashboard.ajinsights.app"
+    requires_secrets: false
+    team: "ops"
+    reads_from: "deployments.yml"
+
+# Development and testing services
+dev_services:
+  - name: "development-env"
+    type: "development"
+    status: "active"
+    description: "Python development container"
+    port: 30700
+    host: "thunder1.vps.webdock.cloud"
+    environment: "development"
+    team: "all"
+    
+teams:
+  - name: "ai-platform"
+    lead: "AI Team Lead"
+    services: ["local-agentic-platform"]
+    access_level: "full"
+    
+  - name: "documentation"
+    lead: "Documentation Lead"
+    services: ["cloudflare-docs"]
+    access_level: "limited"
+    
+  - name: "platform"
+    lead: "Platform Lead"
+    services: ["api-gateway", "deployment-dashboard"]
+    access_level: "full"
+    
+  - name: "ops"
+    lead: "Head of Deployments"
+    services: ["all"]
+    access_level: "admin"
+
+# Port allocation tracking
+port_registry:
+  allocated:
+    30080: "nginx (agentic-platform)"
+    30090: "prometheus (agentic-platform)"
+    30100: "frontend (agentic-platform)"
+    30150: "cloudflare-docs"
+    30151: "deployment-dashboard"
+    30200: "backend (agentic-platform)"
+    30250: "api-gateway"
+    30301: "postgres (agentic-platform)"
+    30401: "redis (agentic-platform)"
+    30601: "grafana (agentic-platform)"
+    30602: "loki (agentic-platform)"
+    30603: "postgres-exporter (agentic-platform)"
+    30700: "development-env"
+    30800: "chroma (agentic-platform)"
+    
+  available:
+    - 30101-30149  # Frontend services
+    - 30152-30199  # Frontend services
+    - 30201-30249  # Backend services  
+    - 30251-30299  # Backend services
+    - 30302-30399  # Database services
+    - 30402-30499  # Cache services
+    - 30500-30599  # Message queue services
+    - 30604-30699  # Monitoring services
+    - 30701-30799  # Development services
+    - 30801-30899  # Integration services
+    - 30900-30999  # Reserved
+
+# Secret management configuration
+secrets:
+  provider: "bitwarden"
+  vault_id: "production-deployments"
+  service_account: "deployment-orchestrator"
+  required_secrets:
+    local-agentic-platform:
+      - "OPENAI_API_KEY"
+      - "ANTHROPIC_API_KEY" 
+      - "XAI_API_KEY"
+      - "POSTGRES_PASSWORD"
+      - "REDIS_PASSWORD"
+      - "GF_ADMIN_PASSWORD"
+    api-gateway:
+      - "JWT_SECRET"
+      - "API_KEYS"
+    cloudflare-integration:
+      - "CLOUDFLARE_API_TOKEN"
+      - "CLOUDFLARE_ZONE_ID"
+
+# Monitoring and health checks
+monitoring:
+  prometheus_targets:
+    - "localhost:30090"  # Prometheus self-monitoring
+    - "localhost:30200"  # Backend metrics
+    - "localhost:30603"  # Postgres exporter
+    
+  health_checks:
+    interval: "30s"
+    timeout: "10s"
+    retries: 3
+    endpoints:
+      - url: "http://localhost:30080/health"
+        service: "nginx"
+      - url: "http://localhost:30090/metrics"
+        service: "prometheus"
+      - url: "http://localhost:30200/health"
+        service: "backend"
+        
+  alerts:
+    slack_webhook: "${SLACK_WEBHOOK_URL}"
+    email: "alerts@ajinsights.app"
+    
+# Backup and disaster recovery
+backup:
+  databases:
+    postgres:
+      schedule: "0 2 * * *"  # Daily at 2 AM
+      retention: "30d"
+      location: "/backups/postgres"
+    redis:
+      schedule: "0 4 * * *"  # Daily at 4 AM  
+      retention: "7d"
+      location: "/backups/redis"
+      
+  volumes:
+    - "postgres_data"
+    - "redis_data"
+    - "chroma_data" 
+    - "grafana_data"
+    - "prometheus_data"
+    
+  offsite:
+    provider: "cloudflare-r2"
+    bucket: "ajinsights-backups"
+    encryption: true
+
+# Deployment automation
+automation:
+  ci_cd:
+    provider: "github-actions"
+    webhook_url: "https://api.github.com/repos/your-org/deployments/dispatches"
+    
+  rollback:
+    strategy: "blue-green"
+    max_rollback_age: "7d"
+    
+  scaling:
+    auto_scale: false
+    max_containers: 5
+    cpu_threshold: 80
+    memory_threshold: 85

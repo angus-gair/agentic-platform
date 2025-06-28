@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  # Company Website - www.ajinsights.app
+  company-website:
+    build: 
+      context: ../aj-insights_com_au
+      dockerfile: Dockerfile
+    container_name: ajinsights-website
+    ports:
+      - "3102:3102"
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3102/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Documentation Site - docs.ajinsights.app
+  documentation:
+    build:
+      context: ../local-agentic-ai-comprehensive-documentation
+      dockerfile: Dockerfile
+    container_name: ajinsights-docs
+    ports:
+      - "3103:80"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_SITE_URL=https://docs.ajinsights.app
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # AI Platform Services - agentic-ai.ajinsights.app
+  # These are defined in local-agentic-platform/docker-compose.yml
+  # We'll use extends or include to avoid duplication
+
+networks:
+  default:
+    driver: bridge
+    name: ajinsights-network
+
+volumes:
+  website-data:
+  docs-data:

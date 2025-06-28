@@ -1,0 +1,9 @@
+name: Account
+
+product:
+  title: Account
+  group: Core platform
+  url: /fundamentals/account/
+
+meta:
+  description: Manage your Cloudflare account.

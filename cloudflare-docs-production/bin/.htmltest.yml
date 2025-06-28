@@ -1,0 +1,13 @@
+DirectoryPath: "dist"
+EnforceHTTPS: false
+IgnoreURLs:
+  - "/api/*"
+  - "#_top"
+CheckLinks: true
+CheckImages: false
+CheckScripts: false
+CheckGeneric: false
+CheckExternal: false
+IgnoreInternalEmptyHash: true
+IgnoreEmptyHref: true
+IgnoreDirectoryMissingTrailingSlash: true

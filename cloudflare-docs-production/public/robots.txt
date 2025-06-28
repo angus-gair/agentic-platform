@@ -1,0 +1,10 @@
+User-agent: *
+
+Disallow: /client-ip-geolocation
+Disallow: /plans/
+Disallow: /constellation
+Disallow: /cdn-cgi/
+Disallow: /security/
+Disallow: /email-security/
+
+Sitemap: https://developers.cloudflare.com/sitemap-index.xml

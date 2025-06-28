@@ -69,9 +69,33 @@ yarn.lock
 *.zip
 archive-backup-*.zip
 
+# Archive and backup directories
+archive/
+backup/
+old/
+*.old
+*.OLD
+*.backup
+*.bak
+
 # MCP config (may contain sensitive data)
-mcp_config.json
+
 
 # Test coverage
 coverage/
 .nyc_output/
+
+# Additional Python patterns
+.mypy_cache/
+.tox/
+.nox/
+
+# Additional Node.js patterns
+.npm/
+.eslintcache
+.parcel-cache/
+
+# Additional dependency managers
+.pnpm-debug.log*
+.yarn/
+.pnp.*

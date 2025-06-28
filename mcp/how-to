@@ -1,0 +1,2 @@
+claude mcp add context7 -s user -- node /home/admin/projects/agentic-platform/mcp/context7-mcp.js
+
