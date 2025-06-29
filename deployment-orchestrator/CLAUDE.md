@@ -38,12 +38,14 @@ npm install                        # Install dependencies
 - `.env`: Environment variables (copy from `.env.example`)
 
 **Infrastructure:**
-- Server: thunder1.vps.webdock.cloud (193.181.208.69)
+- Server: thunder1.vps.webdock.cloud (65.109.1.180) - NEW SERVER (migrated from 193.181.208.69)
 - SSL: Cloudflare termination, HTTP internally
 - Docker network: `agentic-network`
 - Port ranges: 30000-30099 (public), 30100-30199 (frontend), 30200-30299 (backend)
 - Metrics: ENABLE_METRICS=false (Grafana disabled)
 - Network: 268.6 Mbps to Cloudflare, 14ms latency
+- Nginx: Active and configured for all .com.au domains
+- Status: Production deployment active as of 2025-06-29
 
 ## Critical Patterns
 

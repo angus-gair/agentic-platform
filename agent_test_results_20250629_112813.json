@@ -1,0 +1,164 @@
+{
+  "test_summary": {
+    "total_tests": 12,
+    "successful_tests": 12,
+    "failed_tests": 0,
+    "success_rate": 100.0,
+    "average_response_time": 0.39649973313013714,
+    "test_duration_seconds": 28.806219,
+    "agent_distribution": {
+      "unknown": 12
+    }
+  },
+  "detailed_results": [
+    {
+      "timestamp": "2025-06-29T11:27:44.399921",
+      "query": "What career advice would you give to someone transitioning from engineering to data science?",
+      "expected_agent": "AngusGairAgent",
+      "actual_agent": "unknown",
+      "intent": "unknown",
+      "response_time": 0.6059057712554932,
+      "success": true,
+      "error": null,
+      "response_length": 2,
+      "session_id": "test_1751196464"
+    },
+    {
+      "timestamp": "2025-06-29T11:27:47.006068",
+      "query": "Can you help me review my professional profile and suggest improvements?",
+      "expected_agent": "AngusGairAgent",
+      "actual_agent": "unknown",
+      "intent": "unknown",
+      "response_time": 0.3918726444244385,
+      "success": true,
+      "error": null,
+      "response_length": 2,
+      "session_id": "test_1751196467"
+    },
+    {
+      "timestamp": "2025-06-29T11:27:49.398188",
+      "query": "What are the key skills needed for a senior software engineer role?",
+      "expected_agent": "AngusGairAgent",
+      "actual_agent": "unknown",
+      "intent": "unknown",
+      "response_time": 0.45400452613830566,
+      "success": true,
+      "error": null,
+      "response_length": 2,
+      "session_id": "test_1751196469"
+    },
+    {
+      "timestamp": "2025-06-29T11:27:51.852438",
+      "query": "What are the current fuel prices in Sydney?",
+      "expected_agent": "FuelWatchAgent",
+      "actual_agent": "unknown",
+      "intent": "unknown",
+      "response_time": 0.7376511096954346,
+      "success": true,
+      "error": null,
+      "response_length": 2,
+      "session_id": "test_1751196471"
+    },
+    {
+      "timestamp": "2025-06-29T11:27:54.590312",
+      "query": "Show me the cheapest petrol stations near Parramatta",
+      "expected_agent": "FuelWatchAgent",
+      "actual_agent": "unknown",
+      "intent": "unknown",
+      "response_time": 0.3157167434692383,
+      "success": true,
+      "error": null,
+      "response_length": 2,
+      "session_id": "test_1751196474"
+    },
+    {
+      "timestamp": "2025-06-29T11:27:56.906272",
+      "query": "Can you predict fuel price trends for next week?",
+      "expected_agent": "FuelWatchAgent",
+      "actual_agent": "unknown",
+      "intent": "unknown",
+      "response_time": 0.306973934173584,
+      "success": true,
+      "error": null,
+      "response_length": 2,
+      "session_id": "test_1751196476"
+    },
+    {
+      "timestamp": "2025-06-29T11:27:59.213553",
+      "query": "What is the current population of New South Wales?",
+      "expected_agent": "DataAnalysisAgent",
+      "actual_agent": "unknown",
+      "intent": "unknown",
+      "response_time": 0.37664294242858887,
+      "success": true,
+      "error": null,
+      "response_length": 2,
+      "session_id": "test_1751196479"
+    },
+    {
+      "timestamp": "2025-06-29T11:28:01.590410",
+      "query": "Show me employment statistics for Australia",
+      "expected_agent": "DataAnalysisAgent",
+      "actual_agent": "unknown",
+      "intent": "unknown",
+      "response_time": 0.2871716022491455,
+      "success": true,
+      "error": null,
+      "response_length": 2,
+      "session_id": "test_1751196481"
+    },
+    {
+      "timestamp": "2025-06-29T11:28:03.877844",
+      "query": "Can you analyze housing price trends using ABS data?",
+      "expected_agent": "DataAnalysisAgent",
+      "actual_agent": "unknown",
+      "intent": "unknown",
+      "response_time": 0.3074655532836914,
+      "success": true,
+      "error": null,
+      "response_length": 2,
+      "session_id": "test_1751196483"
+    },
+    {
+      "timestamp": "2025-06-29T11:28:06.185612",
+      "query": "How do I set up the monitoring stack for this platform?",
+      "expected_agent": "SystemArchitectAgent",
+      "actual_agent": "unknown",
+      "intent": "unknown",
+      "response_time": 0.31835055351257324,
+      "success": true,
+      "error": null,
+      "response_length": 2,
+      "session_id": "test_1751196486"
+    },
+    {
+      "timestamp": "2025-06-29T11:28:08.504179",
+      "query": "What is the architecture of the agentic platform?",
+      "expected_agent": "SystemArchitectAgent",
+      "actual_agent": "unknown",
+      "intent": "unknown",
+      "response_time": 0.3549361228942871,
+      "success": true,
+      "error": null,
+      "response_length": 2,
+      "session_id": "test_1751196488"
+    },
+    {
+      "timestamp": "2025-06-29T11:28:10.859364",
+      "query": "Can you explain the WebSocket streaming implementation?",
+      "expected_agent": "SystemArchitectAgent",
+      "actual_agent": "unknown",
+      "intent": "unknown",
+      "response_time": 0.30130529403686523,
+      "success": true,
+      "error": null,
+      "response_length": 2,
+      "session_id": "test_1751196490"
+    }
+  ],
+  "metrics": {
+    "websocket_sessions": 2.0,
+    "agent_queries_available": 4,
+    "timestamp": "2025-06-29T11:28:13.183739"
+  }
+}

@@ -22,7 +22,7 @@ metadata:
 infrastructure:
   primary_host:
     name: "thunder1.vps.webdock.cloud"
-    ipv4: "193.181.208.69"
+    ipv4: "65.109.1.180"
     ipv6: "2a0f:0f01:0208:46::0"
     location: "Denmark, EU"
     type: "KVM Virtual Machine"

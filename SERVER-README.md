@@ -2,12 +2,13 @@
 
 ## Overview
 
-- **Status**: ✅ Running  
+- **Status**: ✅ Running (NEW SERVER)
 - **Monitoring**: HTTP ✅  
 - **Alias**: `thunder1.vps.webdock.cloud`  
-- **IPv4**: `193.181.208.69`  
+- **IPv4**: `65.109.1.180` (migrated from 193.181.208.69)
 - **IPv6**: `2a0f:0f01:0208:46::0`  
-- **Web Root**: `/var/www/html`  
+- **Web Root**: `/var/www/html`
+- **Deployment Date**: 2025-06-29  
 
 ### Server Details
 - **Location**: 🇪🇺 Europe / Denmark  

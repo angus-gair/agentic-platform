@@ -12,8 +12,8 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 # Base directory
-BASE_DIR="/home/admin/projects/agentic-platform"
-ORCHESTRATOR_DIR="$BASE_DIR/deployment-orchestrator"
+BASE_DIR="/root"
+ORCHESTRATOR_DIR="/root/agentic-platform/deployment-orchestrator"
 
 # Function to print colored output
 print_status() {
