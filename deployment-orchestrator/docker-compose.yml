@@ -39,8 +39,23 @@ services:
       retries: 3
 
   # AI Platform Services - agentic-ai.ajinsights.app
-  # These are defined in local-agentic-platform/docker-compose.yml
-  # We'll use extends or include to avoid duplication
+  abs-agent-backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    container_name: abs-agent-backend
+    ports:
+      - "30080:8000"
+    environment:
+      - NODE_ENV=production
+      - PYTHONPATH=/app
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
 networks:
   default:
