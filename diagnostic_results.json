@@ -1,0 +1,39 @@
+{
+  "timestamp": "2025-06-30T00:35:03.149118",
+  "tests": {
+    "imports": true,
+    "registration": true,
+    "api_connectivity": true,
+    "queries": [
+      {
+        "query": "What is the current population of New South Wales?",
+        "agent": "DataAnalysisAgent",
+        "intent": "population_query",
+        "success": true,
+        "response_time": 0.7286331653594971,
+        "response_length": 447,
+        "error": null
+      },
+      {
+        "query": "Show me employment statistics for Australia",
+        "agent": "DataAnalysisAgent",
+        "intent": "employment_statistics",
+        "success": true,
+        "response_time": 1.574481725692749,
+        "response_length": 808,
+        "error": null
+      },
+      {
+        "query": "Can you analyze housing price trends using ABS data?",
+        "agent": "DataAnalysisAgent",
+        "intent": "housing_trends",
+        "success": true,
+        "response_time": 0.7326407432556152,
+        "response_length": 1036,
+        "error": null
+      }
+    ],
+    "query_success": true,
+    "data_retrieval": true
+  }
+}
