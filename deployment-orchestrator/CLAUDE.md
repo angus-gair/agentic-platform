@@ -55,3 +55,23 @@ npm install                        # Install dependencies
 **Secrets:** Use `.env` file, never commit credentials
 
 Technology: Node.js ES modules, Docker Compose, Bash, targeting Ubuntu LEMP VPS
+
+## ABS Integration
+
+The platform includes a robust Australian Bureau of Statistics (ABS) data integration:
+
+**Files:**
+- `backend/integrations/abs_client.py`: Unified ABS API client with fallback mechanisms
+- `backend/agents/data_agent.py`: Simplified data analysis agent (5 core tools)
+
+**Capabilities:**
+- Population statistics by state/territory (ERP_QUARTERLY dataset)
+- Economic indicators: CPI, unemployment, GDP (CPI, LF, ANA_AGG datasets)
+- Real-time API connectivity testing with graceful degradation
+- Fallback data generation when ABS API unavailable
+
+**Troubleshooting:**
+- Check ABS API connectivity: Use data agent's test_abs_connection tool
+- Verify dataset identifiers in abs_client.py (validated for 2025 API)
+- All tools include comprehensive error handling and realistic fallback data
+- Logs: Check container logs for ABS client connection issues
